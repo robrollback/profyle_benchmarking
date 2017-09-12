@@ -3,14 +3,15 @@ Benchmarking cancer tools for pipeline harmonization
 
 This repo will contain all the relevant information to perform cross center benchmarking for particular aspects of the cancer analysis
 
-##PHASE 1: SNVs and Indels
+PHASE 1: SNVs and Indels
+========================
 
-NA12878/NA24385 tumor-like mixture
+##NA12878/NA24385 tumor-like mixture
 
 This is a sequenced mixture dataset of two [Genome in a Bottle] (http://jimb.stanford.edu/giab/) (GIAB) samples:
 
-- NA12878 https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM12878&product=CC
-- NA24385 https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM24385&product=CC
+- [NA12878] (https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM12878&product=CC)
+- [NA24385] (https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM24385&product=CC)
 
 The mixture simulates a tumor and normal cancer dataset for validation of low
 frequency calling by somatic variant callers. NA12878 variants are the "somatic"
@@ -21,14 +22,8 @@ The directory contains:
   NA12878 with 70% NA24385. The samples are physically mixed at these ratios
   prior to sequencing. We expect somatic variants at 15% (unique heterozygotes
   in NA12878) and 30% (unique homozygotes in NA12878).
-
-  24385-12878-30-200_R1_001.fastq.gz
-  24385-12878-30-200_R2_001.fastq.gz
-
+  
 - A 30x "normal" whole genome fastq (paired, 150bp) of NA24385
-
-  24385-200_AH5G7WCCXX_S4_L004_R1_001.fastq.gz
-  24385-200_AH5G7WCCXX_S4_L004_R2_001.fastq.gz
 
 - A truth set generated from Genome in a Bottle 3.2.2 calls for NA12878/NA24385
 
