@@ -1,17 +1,17 @@
 # PROFYLE - Pan-Canadian Cancer Benchmarking
 Benchmarking cancer tools for pipeline harmonization
 
-This repo will contain all the relevant information to perform cross center benchmarking for particular aspects of the cancer analysis
+This repo will contain all the relevant information to perform cross center benchmarking for particular aspects of cancer analysis
 
 PHASE 1: SNVs and Indels
-========================
+------------------------
 
-##NA12878/NA24385 tumor-like mixture
+**NA12878/NA24385 tumor-like mixture**
 
-This is a sequenced mixture dataset of two [Genome in a Bottle] (http://jimb.stanford.edu/giab/) (GIAB) samples:
+This is a sequenced mixture dataset of two [Genome in a Bottle](http://jimb.stanford.edu/giab/) (GIAB) samples:
 
-- [NA12878] (https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM12878&product=CC)
-- [NA24385] (https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM24385&product=CC)
+- [NA12878](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM12878&product=CC)
+- [NA24385](https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM24385&product=CC)
 
 The mixture simulates a tumor and normal cancer dataset for validation of low
 frequency calling by somatic variant callers. NA12878 variants are the "somatic"
@@ -63,13 +63,13 @@ The initial structure of your folders should look like this:
 
 ### Goal
 
-Each center will upload the ceph mixture locally and run their variant caller of interest on the provide final bam
+Each center will upload the ceph mixture locally and run their variant callers of interest on the provide final bam
 
 Each center will then provide their raw vcf file for benchmark assessment following well established benchmarking paradigm i.e. similar to the CGEN benchmarking
 
 Real time genomics (RTG) vcfeval will be run locally by McGill using same arguments and truth set provided by the Brad Chapman from Havard University
 
-The following data will be generated and the table below will be filled out and publically available: 
+The following data will be generated and the table below will be filled out and made available to the group: 
 
 | True-pos | False-pos | False-neg | Precision | Sensitivity | F-measure |
 |:-------- |:--------- |:--------- |:--------- |:----------- |:--------- |
