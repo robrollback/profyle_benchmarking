@@ -6,7 +6,7 @@ This repo will contain all the relevant information to perform cross center benc
 ##PHASE 1: SNVs and Indels
 
 NA12878/NA24385 tumor-like mixture
-==================================
+
 This is a sequenced mixture dataset of two [Genome in a Bottle] (http://jimb.stanford.edu/giab/) (GIAB) samples:
 
 - NA12878 https://catalog.coriell.org/0/Sections/Search/Sample_Detail.aspx?Ref=GM12878&product=CC
@@ -54,7 +54,7 @@ As depicted in the diagram above the ceph mixture was processed as follows:
 2. Alignment of trimmed reads to GRCh37.p13 with bwa+mem 0.7.12
 3. GATK 3.6 Indel realignment using both samples to refine indel regions
 4. Mark duplicates with sambamba 0.6.5
-5  Base recalibration of each samples with GATK 3.6
+5.  Base recalibration of each samples with GATK 3.6
 
 The initial structure of your folders should look like this:
 ```
