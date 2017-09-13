@@ -54,10 +54,11 @@ As depicted in the diagram above the ceph mixture was processed as follows:
 The initial structure of your folders should look like this:
 ```
 <ROOT>
-|--snv_indel
-    `---final_bam
-        `---ceph_mixture_normal
-        `---ceph_mixture_tumor
+|--profyle_benchmark
+    `---snv_indel
+        `---final_bam
+            `---ceph_mixture_normal
+            `---ceph_mixture_tumor
     
 ```
 
@@ -76,7 +77,7 @@ The following data will be generated and the table below will be filled out and 
 
 
 ### Required files for assessment
-1. Final raw vcf.
+1. Final raw vcf in the following format: ceph_mixture.<montreal/toronto/vancouver>.<variant_caller>.<caller_version>.vcf.gz 
 
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
