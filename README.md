@@ -185,13 +185,13 @@ Generated using Realtime Genomics (RTG) vcfeval 3.6.2 and DREAM3 truth set gener
 1. Most sensitive : Vardict, Mutect2_3.8, Mutect2_4.0.8.1, strelka2+manta, strelka2...
 2. Most precise   : Strelka2+manta, strelka2, Mutect2_3.8, Mutect2_4.0.8.1 ...
 3. CPU time: Mutect2_4.0.8.1 is faster than GATK3, strelka2+manta faster than GATK4, lancet is extremely slow.
-4. TP indel size: Varscan2 and Samtool exactly the same, Mutect2 3.8 captures the widest range of indel sizes, surprisely Strelka2+manta and lancet does not.
+4. TP indel size: Varscan2, Samtool and strelka2 exactly the same, Mutect2 3.8 captures the widest range of indel sizes, surprisely Strelka2+manta and lancet does not.
+5. Ensemble approach: calls from all 4 callers is more sensitive than just one caller.  Filtering by 2 or more callers greatly reduces FPs but at the expense of TPs
 
 ## Conclusions
 
 1. Likely replacing samtools with strelka2+manta but to be confirmed with ceph mixture analysis.
-2. Rerunning current ensemble with mutect2 3.8
-3. Continue to investigate and improve GATK4 mutect2 calls 
+2. Continue to investigate and improve GATK4 mutect2 calls 
 
 ## Ceph mixture
 
