@@ -180,6 +180,10 @@ Generated using Realtime Genomics (RTG) vcfeval 3.6.2 and DREAM3 truth set gener
 |   ensemble+1caller  |             | 0.0565      | 0.9658      | 0.1058     |  -53 to 70     |                      |
 |   ensemble+2callers |             | 0.9954      | 0.8632      | 0.8637     |  -40 to 39     |                      |
 
+**Oct 25, 2018** - Generated violin plots to visualize the 3 subclones at 50%, 33% and 20% VAFs
+
+![d3wes_subclone_vaf](img/vaf_violin.jpeg)
+
 ## Observations
 
 1. Most sensitive : Vardict, Mutect2_3.8, Mutect2_4.0.8.1, strelka2+manta, strelka2...
@@ -187,18 +191,58 @@ Generated using Realtime Genomics (RTG) vcfeval 3.6.2 and DREAM3 truth set gener
 3. CPU time: Mutect2_4.0.8.1 is faster than GATK3, strelka2+manta faster than GATK4, lancet is extremely slow.
 4. TP indel size: Varscan2, Samtool and strelka2 exactly the same, Mutect2 3.8 captures the widest range of indel sizes, surprisely Strelka2+manta and lancet does not.
 5. Ensemble approach: calls from all 4 callers is more sensitive than just one caller.  Filtering by 2 or more callers greatly reduces FPs but at the expense of TPs
+6. **Oct 25, 2018** Subclone VAFs: Most callers except lancet identify subclones at 50%, 33% and 20%.  
 
 ## Conclusions
 
 1. Likely replacing samtools with strelka2+manta but to be confirmed with ceph mixture analysis.
 2. Continue to investigate and improve GATK4 mutect2 calls 
 
+### Oct 25, 2018
+
 ## Ceph mixture
 
-Selection of ceph mixture chromosome for fast benchmarking framework
+Selection of ceph mixture chromosome for fast benchmarking framework (GRCh37.p13)
 
+|   Chromosome    | GC content  | Total TP variants   | Total TP snps | Total TP indels |  TP indel size dist |
+|:----------------|:----------- |:------------------- |:------------- |:--------------- |:------------------- |
+| 1	              | 0.4174	    | 88571	              | 80750	      | 7821   	        | -45 to 50           |
+| 2	              | 0.4024	    | 95853	              | 87322	      | 8531	        | -48 to 47           |
+| 3	              | 0.3969	    | 81770	              | 74633         |	7137	        | -42 to 42           |
+| 4	              | 0.3825	    | 80166	              | 72806	      | 7360	        | -40 to 56           |
+| 5	              | 0.3952	    | 75522	              | 68888	      | 6634            | -37 to 66           | 
+| 6	              | 0.3961	    | 71683	              | 65091	      | 6592	        | -41 to 58           |
+| 7	              | 0.4075	    | 62689	              | 57177	      | 5512            | -37 to 48           |
+| 8	              | 0.4018	    | 61280	              | 56249	      | 5031	        | -30 to 44           |
+| 9	              | 0.4132	    | 48552	              | 44433	      | 4119	        | -40 to 62           |
+| 10	          | 0.4158	    | 53528	              | 48864	      | 4664	        | -45 to 52           |
+| 11	          | 0.4157	    | 51846	              | 47354	      | 4492            | -49 to 46           |
+| 12              | 0.4081      | 53161	              | 48374         |	4787	        | -35 to 41           |
+| 13	          | 0.3853	    | 41425	              | 37756	      | 3669	        | -29 to 54           |
+| 14	          | 0.4089	    | 36149	              | 32931	      | 3218	        | -41 to 48           |
+| 15	          | 0.4220	    | 30377	              | 27780	      | 2597	        | -50 to 54           |
+| 16              |	0.4479	    | 34462	              | 31971	      | 2491	        | -40 to 44           |
+| 17	          | 0.4554	    | 27688	              | 25168	      | 2520	        | -29 to 42           |
+| 18	          | 0.3979	    | 33736	              | 30649	      | 3087	        | -41 to 33           |
+| 19	          | 0.4836	    | 20347	              | 18389	      | 1958	        | -28 to 44           |
+| 20	          | 0.4413      | 25771	              | 23584	      | 2187	        | -32 to 52           |
+| 21        	  | 0.4083	    | 15550	              | 14196	      | 1354	        | -27 to 36           |
+| 22              |	0.4799	    | 14660	              | 13440	      | 1220            | -29 to 39           |
 
+**Selection criteria**
+1. Reasonable number of true positive SNPs and Indels
+2. Sizable indel size distribution
+3. GC content close to global average
+4. Any others? e.g. # genes, # pseudogenes
 
+Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
+
+## Next steps
+
+1. Extract chromosome Z from fasta and bam (both reads aligned to chrZ and unmapped reads)
+2. Test a select number of callers on chrZ and confirm benchmarking metrics similar to those ran on the full genome
+3. If metrics consistent download the two ceph samples used to generate the mixture and create synthetic purities from 10% to 100% at 10% intervals
+4. Rerun all callers on all 10 synthetic datasets to help select callers to best capture the full spectrum of purities 
 
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
