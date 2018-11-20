@@ -147,10 +147,10 @@ achieve meaningful benchmarking metrics.
 
 Two datasets come to mind.  DREAM 3 WES dataset and subsetting the ceph mixture
 
-|       Dataset         | Total variants |Num SNPs | Num indels |  Size indels | 
-|:--------------------: |:-------------- |:------- |:---------- |:------------ |
-|      DREAM3_WES       | 760            | 361     | 399        | -53 to 70bp  |
-|     ceph_mixture      |                |         |            |              |
+|       Dataset         | Total variants |Num SNPs   | Num indels |  Size indels | 
+|:--------------------: |:-------------- |:--------- |:---------- |:------------ |
+|      DREAM3_WES       | 760            | 361       | 399        | -53 to 70bp  |
+|     ceph_mixture      | 1104786        | 10007805  | 96981      | -29 to 66bp  |             
 
 
 ## DREAM3 WES setup
@@ -177,8 +177,8 @@ Generated using Realtime Genomics (RTG) vcfeval 3.6.2 and DREAM3 truth set gener
 |       strelka2      |  2.9.6      | 0.9265      | 0.8461      | 0.8845     |  -32 to 25     | 16 mins (1-12cpu)    |
 |    strelka2+manta   | 2.9.6+1.3.2 | 0.9279      | 0.8803      | 0.9034     |  -40 to 39     |  14+22mins (1-12,6)  |  
 |        lancet       |  1.0.7      | 0.8603      | 0.8671      | 0.8637     |  -53 to 39     |    13.5h (12 cpu)    |
-|   ensemble+1caller  |             | 0.0565      | 0.9658      | 0.1058     |  -53 to 70     |                      |
-|   ensemble+2callers |             | 0.9954      | 0.8632      | 0.8637     |  -40 to 39     |                      |
+|       ensemble      | 1+ callers  | 0.0565      | 0.9658      | 0.1058     |  -53 to 70     |                      |
+|       ensemble      | 2+ callers  | 0.9954      | 0.8632      | 0.8637     |  -40 to 39     |                      |
 
 **Oct 25, 2018** - Generated violin plots to visualize the 3 subclones at 50%, 33% and 20% VAFs
 
@@ -204,36 +204,38 @@ Generated using Realtime Genomics (RTG) vcfeval 3.6.2 and DREAM3 truth set gener
 
 Selection of ceph mixture chromosome for fast benchmarking framework (GRCh37.p13)
 
-|   Chromosome    | GC content  | Total TP variants   | Total TP snps | Total TP indels |  TP indel size dist |
-|:----------------|:----------- |:------------------- |:------------- |:--------------- |:------------------- |
-| 1	              | 0.4174	    | 88571	              | 80750	      | 7821   	        | -45 to 50           |
-| 2	              | 0.4024	    | 95853	              | 87322	      | 8531	        | -48 to 47           |
-| 3	              | 0.3969	    | 81770	              | 74633         |	7137	        | -42 to 42           |
-| 4	              | 0.3825	    | 80166	              | 72806	      | 7360	        | -40 to 56           |
-| 5	              | 0.3952	    | 75522	              | 68888	      | 6634            | -37 to 66           | 
-| 6	              | 0.3961	    | 71683	              | 65091	      | 6592	        | -41 to 58           |
-| 7	              | 0.4075	    | 62689	              | 57177	      | 5512            | -37 to 48           |
-| 8	              | 0.4018	    | 61280	              | 56249	      | 5031	        | -30 to 44           |
-| 9	              | 0.4132	    | 48552	              | 44433	      | 4119	        | -40 to 62           |
-| 10	          | 0.4158	    | 53528	              | 48864	      | 4664	        | -45 to 52           |
-| 11	          | 0.4157	    | 51846	              | 47354	      | 4492            | -49 to 46           |
-| 12              | 0.4081      | 53161	              | 48374         |	4787	        | -35 to 41           |
-| 13	          | 0.3853	    | 41425	              | 37756	      | 3669	        | -29 to 54           |
-| 14	          | 0.4089	    | 36149	              | 32931	      | 3218	        | -41 to 48           |
-| 15	          | 0.4220	    | 30377	              | 27780	      | 2597	        | -50 to 54           |
-| 16              |	0.4479	    | 34462	              | 31971	      | 2491	        | -40 to 44           |
-| 17	          | 0.4554	    | 27688	              | 25168	      | 2520	        | -29 to 42           |
-| 18	          | 0.3979	    | 33736	              | 30649	      | 3087	        | -41 to 33           |
-| 19	          | 0.4836	    | 20347	              | 18389	      | 1958	        | -28 to 44           |
-| 20	          | 0.4413      | 25771	              | 23584	      | 2187	        | -32 to 52           |
-| 21        	  | 0.4083	    | 15550	              | 14196	      | 1354	        | -27 to 36           |
-| 22              |	0.4799	    | 14660	              | 13440	      | 1220            | -29 to 39           |
+| Chromosome | GC content | Total TP | TP snps | TP indels |  TP indel dist | Precision | Sensitivity| F1-score |
+|:---------- |:---------- |:---------|:--------|:--------- |:-------------- |:--------- |:---------- |:-------- |
+| All        | 0.4174     | 1104786  | 1007805 | 96981     | -29 to 66      | 0.9401    | 0.9758     | 0.9576   |
+| 1	         | 0.4174	  | 88571	 | 80750   | 7821      | -45 to 50      | 0.9395	| 0.9748	 | 0.9568   |
+| 2	         | 0.4024	  | 95853	 | 87322   | 8531	   | -48 to 47      | 0.9442	| 0.9752	 | 0.9594   |
+| 3	         | 0.3969     | 81770	 | 74633   | 7137	   | -42 to 42      | 0.9406	| 0.9776	 | 0.9587   |
+| 4	         | 0.3825	  | 80166	 | 72806   | 7360	   | -40 to 56      | 0.9370	| 0.9768     | 0.9565   |
+| 5	         | 0.3952	  | 75522	 | 68888   | 6634      | -37 to 66      | 0.9416	| 0.9776	 | 0.9592   |
+| 6	         | 0.3961	  | 71683	 | 65091   | 6592	   | -41 to 58      | 0.9379	| 0.9754     | 0.9563   |
+| 7	         | 0.4075	  | 62689	 | 57177   | 5512      | -37 to 48      | 0.9388	| 0.9769	 | 0.9574   |
+| 8	         | 0.4018	  | 61280	 | 56249   | 5031	   | -30 to 44      | 0.9385	| 0.9789	 | 0.9583   |
+| **9**      | 0.4132	  | 48552	 | 44433   | 4119	   | -40 to 62      | 0.9432	| 0.9757	 | 0.9592   |
+| 10	     | 0.4158	  | 53528	 | 48864   | 4664	   | -45 to 52      | 0.9436	| 0.9762	 | 0.9596   |
+| 11	     | 0.4157	  | 51846	 | 47354   | 4492      | -49 to 46      | 0.9341	| 0.9768	 | 0.9550   |
+| 12         | 0.4081     | 53161	 | 48374   | 4787	   | -35 to 41      | 0.9337	| 0.9747	 | 0.9538   |
+| 13	     | 0.3853	  | 41425	 | 37756   | 3669	   | -29 to 54      | 0.9453	| 0.9775	 | 0.9611   |
+| 14	     | 0.4089	  | 36149	 | 32931   | 3218	   | -41 to 48      | 0.9374	| 0.9760	 | 0.9563   |
+| 15	     | 0.4220	  | 30377	 | 27780   | 2597	   | -50 to 54      | 0.9393	| 0.9765     | 0.9576   |
+| 16         | 0.4479	  | 34462	 | 31971   | 2491	   | -40 to 44      | 0.9500	| 0.9754	 | 0.9625   |
+| 17	     | 0.4554	  | 27688	 | 25168   | 2520	   | -29 to 42      | 0.9411	| 0.9709	 | 0.9558   |
+| 18	     | 0.3979	  | 33736	 | 30649   | 3087	   | -41 to 33      | 0.9447	| 0.9746	 | 0.9594   |
+| 19	     | 0.4836	  | 20347	 | 18389   | 1958	   | -28 to 44      | 0.9334	| 0.9580	 | 0.9455   |
+| 20	     | 0.4413     | 25771	 | 23584   | 2187	   | -32 to 52      | 0.9484	| 0.9751	 | 0.9616   |
+| 21         | 0.4083	  | 15550	 | 14196   | 1354	   | -27 to 36      | 0.9533	| 0.9737	 | 0.9634   |
+| 22         | 0.4799	  | 14660	 | 13440   | 1220      | -29 to 39      | 0.9575	| 0.9689	 | 0.9631   |
 
 **Selection criteria**
 1. Reasonable number of true positive SNPs and Indels
 2. Sizable indel size distribution
 3. GC content close to global average
-4. Any others? e.g. # genes, # pseudogenes
+4. Mutect2 3.8 benchmarking metrics (Added Oct)
+5. Any others? e.g. # genes, # pseudogenes
 
 Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 
@@ -243,6 +245,61 @@ Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 2. Test a select number of callers on chrZ and confirm benchmarking metrics similar to those ran on the full genome
 3. If metrics consistent download the two ceph samples used to generate the mixture and create synthetic purities from 10% to 100% at 10% intervals
 4. Rerun all callers on all 10 synthetic datasets to help select callers to best capture the full spectrum of purities 
+
+### Nov 22, 2018
+
+## Chromosome 9 of Ceph mixutre
+
+|   Somatic caller    | Version     | Precision   | Sensitivity | F1-measure |  TP indel size | cpu time (chunks)    |
+|:------------------- |:----------- |:----------- |:----------- |:---------- |:-------------- |:-------------------- |
+|     **varscan**     |  2.4.3      | 0.9661      | 0.9743      | 0.9702     |  -25 to 36     |                      |
+|     **vardict**     |  1.4.8      | 0.9074      | 0.9016      | 0.9045     |  -46 to 36     |                      |
+|     **samtools**    |  1.3        | 0.9421      | 0.6591      | 0.7756     |  -30 to 36     |                      |
+|   **mutect2_all**   |  3.8        | 0.9432      | 0.9757      | 0.9592     |  -46 to 40     |                      |
+|       mutect2       |  3.8        | 0.9958      | 0.6269      | 0.7694     |  -46 to 40     |                      |
+|     mutect2_all     |  4.0.8.1    | 0.9478      | 0.9782      | 0.9627     |  -46 to 40     |                      |
+|       mutect2       |  4.0.8.1    | 0.9948      | 0.8554      | 0.9198     |  -46 to 40     |                      |
+|      strelka2       |  2.9.6      | 0.9981      | 0.9219      | 0.9585     |  -34 to 36     |                      |
+| **strelka2+manta**  | 2.9.6+1.3.2 | 0.9981      | 0.9221      | 0.9586     |  -46 to 40     |                      |  
+|       ensemble      | 1+ callers  | 0.8811      | 0.9909      | 0.9328     |  -46 to 40     |                      |
+|       ensemble      | 2+ callers  | 0.9649      | 0.9831      | 0.9739     |  -46 to 40     |                      |
+
+## Insilico purity sample SOP
+
+1. Extract 60x HG002 and 300x HG001 from GIAB for purity at 10 to 90%
+2. Extract chromosome 9 and subset number of reads based on purity using sambamba with a specific random seed for reproducibility 
+3. Sort and merge HG002 and HG001
+4. Trim, align, indel realignment, mark duplicates and qc metrcis on each 9 pairs
+5. Run somatic caller on final mark dup bam
+6. Use ceph mixture truth set subset for chr 9 and run vcfeval 3.6.2
+
+|    Sample name      | mean cov.   | % over 10x  | % over 25x  | % over 50x | est. purity |
+|:------------------- |:----------- |:----------- |:----------- |:---------- |:------------|
+| HG002_30x           | 29.67	    | 93.95	      | 76.27	    | 1.5	     | NA          |
+| HG001_HG002_p10     | 58.83	    | 95.18	      | 93.52	    | 78.54      | 8.88%       |
+| HG001_HG002_p20	  | 58.56	    | 95.32	      | 93.59	    | 78.10	     | 20.03%      |
+| HG001_HG002_p30	  | 58.28	    | 95.45	      | 93.65     	| 77.60	     | 30.17%      |
+| HG001_HG002_p40	  | 58.00     	| 95.54	      | 93.72	    | 77.11	     | 39.25%      |
+| HG001_HG002_p50	  | 57.69	    | 95.61	      | 93.79    	| 76.51	     | 49.84%      |
+| HG001_HG002_p60	  | 57.37	    | 95.66	      | 93.85	    | 75.87	     | 58.29%      |
+| HG001_HG002_p70	  | 57.05	    | 95.69	      | 93.90	    | 75.20	     | 68.79%      |
+| HG001_HG002_p80	  | 56.69	    | 95.70	      | 93.94	    | 74.41	     | 79.25%      |
+| HG001_HG002_p90	  | 56.35	    | 95.71	      | 93.97	    | 73.59	     | 89.32%      |
+
+
+## Results
+
+**Precision**
+
+![HG001_HG002.precision](img/HG001_HG002.precision.jpeg)
+
+**Sensitivity**
+
+![HG001_HG002.sensitivity](img/HG001_HG002.sensitivity.jpeg)
+
+**F1-Score**
+
+![HG001_HG002.f1score](img/HG001_HG002_F1score.jpeg)
 
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
