@@ -295,7 +295,7 @@ Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 
 **Sensitivity**
 
-![HG001_HG002.sensitivity](img/HG001_HG002.sensitivity.jpeg)
+![HG001_HG002.sensitivity](img/HG001_HG002_sens.jpeg)
 
 **F1-Score**
 
