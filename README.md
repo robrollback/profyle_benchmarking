@@ -266,7 +266,7 @@ Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 
 ## Insilico purity sample SOP
 
-1. Extract 60x HG002 and 300x HG001 from GIAB for purity at 10 to 90%
+1. To produce insilico samples for purities ranging from 10% to 90%, reads were extracted from GIAB samples: Normal: 60x HG002 and Tumor: 300x HG001
 2. Extract chromosome 9 and subset number of reads based on purity using sambamba with a specific random seed for reproducibility 
 3. Sort and merge HG002 and HG001
 4. Trim, align, indel realignment, mark duplicates and qc metrcis on each 9 pairs
