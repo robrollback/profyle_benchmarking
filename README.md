@@ -301,6 +301,16 @@ Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 
 ![HG001_HG002.f1score](img/HG001_HG002_F1score.jpeg)
 
+## Observations
+
+1. Precision >=95%: Ensemble_2+, Strelka2 and mutect2 stable accross all purity ranges.  Vardict is good at low purity 10-80%.  Samtools and Varscan2 good between 20% to 60%.  Ensemble_1+ below 95%
+
+2. Sensitivity >=95%: >=20% Ensemble_1+, >=30% purity Ensemble +2+, Mutect2, and Vardict, >=40% purity strelka2,  40-70% varscan2,  50-80% samtools
+
+3. F1-score >=95%: >=20% purity mutect2, Ensemble_2+, >=30% purity strelka2, 30-60% Ensemble_1+, varscan2, 40-80% samtools
+
+Any new caller to test? Or move onto RNA and structural variants.
+
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
 
