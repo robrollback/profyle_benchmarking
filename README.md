@@ -303,13 +303,57 @@ Choices either chr 5 or chr9.  Favoring chr 9 due to GC content.
 
 ## Observations
 
-1. Precision >=95%: Ensemble_2+, Strelka2 and mutect2 stable accross all purity ranges.  Vardict is good at low purity 10-80%.  Samtools and Varscan2 good between 20% to 60%.  Ensemble_1+ below 95%
+1. Precision >=95%: Ensemble_2+, Strelka2 and mutect2 stable across all purity ranges.  Vardict is good at low purity 10-80%.  Samtools and Varscan2 good between 20% to 60%.  Ensemble_1+ below 95%
 
 2. Sensitivity >=95%: >=20% Ensemble_1+, >=30% purity Ensemble +2+, Mutect2, and Vardict, >=40% purity strelka2,  40-70% varscan2,  50-80% samtools
 
 3. F1-score >=95%: >=20% purity mutect2, Ensemble_2+, >=30% purity strelka2, 30-60% Ensemble_1+, varscan2, 40-80% samtools
 
 Any new caller to test? Or move onto RNA and structural variants.
+
+### February 28, 2018
+
+## Assessment of combination of callers of chromosome 9 of Ceph mixutre
+
+In this section we investigate the behaviour of combining callers and majority-rule filtering at various purity levels of insilico ceph mixture.  Based on the assessement of individual callers from both the synthetic and insilico mixture: mutect2_3.8, strelka_2.9.6, vardict_1.4.8 and varscan2_2.4.3 were chosen. The expectations is that the addition of more callers should add value in terms of benchmarking metrics.
+
+## Processing SOP
+
+1. VCFs from previous experiment (Nov 22, 2018) for four callers:  mutect2, strelka, vardict and varscan were selected for combinatorial analysis
+2. VCFs were combined using a bcftools merge wrapper
+3. Ensemble vcf was assessed against the ceph_mixture chr 9 truth set using vcfeval 3.6.2
+
+## Results
+
+**F1-score single callers**
+
+![HG001_HG002.f1score](img/HG001_HG002_F1score.jpeg)
+
+**F1-score union combinations of callers**
+
+![f1_ensemble_caller1](img/f1_score_ens_comb_caller1.jpeg)
+
+**F1-score combinations of callers filtering for varinats found in >=2 callers**
+
+![f1_ensemble_caller2](img/f1_score_ens_comb_caller2.jpeg)
+
+## Observations
+
+1. Looking at the union of various combination of callers (*_1+) the addition of callers reduces F1 score.  Looking at the specificity and sensitivity more closely, the addition of more callers does increase sensitivity the rate of increase in sensitivity is smaller than the decrease in specificity.  Likely due to caller specific FP singletons.
+
+2. Looking at calls identified in 2 or more callers, the addition of callers has minimal impact when purity is above 60%. In fact 3 callers has slightly better F1 scores >=50% putiry. However, at lower purity, especially between 10-49% the addition of callers seems to improve F1 score based on the dramatic jump between 2 and 3 callers, and a minor increase between 3 and 4 callers. Looking at the specificiry and sensivity, the decrease precision due to filtering out Tp singletons decreases faster than the increase in sensitivity as callers are added.
+
+## Recommendations
+
+1. The use of ensemble approach and the number of callers involved in the analysis is dependent on the estimated purity.
+2. Purity above 50%,  I would recommend using at least 3 callers and filter >=2 callers.
+3. Purity below 50%, I would recomment using at least 4 callers and filter >=2 callers.
+
+## What's next
+
+1. Missed testing 3 callers implementation using mutect2, strelka2 and varscan2
+2. Trying the machine learning approach: somaticSeq 
+3. Any other suggestions?
 
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
