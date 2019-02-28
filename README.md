@@ -325,7 +325,7 @@ In this section we investigate the behaviour of combining callers and majority-r
 
 ## Results
 
-**F1-score single callers**
+**F1-score single callers from Nov 22, 2018**
 
 ![HG001_HG002.f1score](img/HG001_HG002_F1score.jpeg)
 
@@ -333,20 +333,22 @@ In this section we investigate the behaviour of combining callers and majority-r
 
 ![f1_ensemble_caller1](img/f1_score_ens_comb_caller1.jpeg)
 
+## Observation : Union of calls 
+
+1. Looking at the union of various combination of callers (*_1+) the addition of callers reduces F1 score.  Looking at the specificity and sensitivity more closely, the addition of more callers does increase sensitivity the rate of increase in sensitivity is smaller than the decrease in specificity.  Likely due to caller specific FP singletons.
+
 **F1-score combinations of callers filtering for varinats found in >=2 callers**
 
 ![f1_ensemble_caller2](img/f1_score_ens_comb_caller2.jpeg)
 
-## Observations
+## Observation : 2 or more callers
 
-1. Looking at the union of various combination of callers (*_1+) the addition of callers reduces F1 score.  Looking at the specificity and sensitivity more closely, the addition of more callers does increase sensitivity the rate of increase in sensitivity is smaller than the decrease in specificity.  Likely due to caller specific FP singletons.
-
-2. Looking at calls identified in 2 or more callers, the addition of callers has minimal impact when purity is above 60%. In fact 3 callers has slightly better F1 scores >=50% putiry. However, at lower purity, especially between 10-49% the addition of callers seems to improve F1 score based on the dramatic jump between 2 and 3 callers, and a minor increase between 3 and 4 callers. Looking at the specificiry and sensivity, the decrease precision due to filtering out Tp singletons decreases faster than the increase in sensitivity as callers are added.
+1. Looking at calls identified in 2 or more callers, the addition of callers has minimal impact when purity is above 60%. In fact 3 callers has slightly better F1 scores >=50% putiry. However, at lower purity, especially between 10-49% the addition of callers seems to improve F1 score based on the dramatic jump between 2 and 3 callers, and a minor increase between 3 and 4 callers. Looking at the specificiry and sensivity, the decrease precision due to filtering out Tp singletons decreases faster than the increase in sensitivity as callers are added.
 
 ## Recommendations
 
 1. The use of ensemble approach and the number of callers involved in the analysis is dependent on the estimated purity.
-2. Purity above 50%,  I would recommend using at least 3 callers and filter >=2 callers.
+2. Purity above 50%, I would recommend using at least 3 callers and filter >=2 callers.
 3. Purity below 50%, I would recomment using at least 4 callers and filter >=2 callers.
 
 ## What's next
