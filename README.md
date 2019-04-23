@@ -411,14 +411,14 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 ## Observations : DRAGEN
 
-1. DRAGEN all variants is more sensitive than all single callers, however, the call set contains more false positives than the other callers.
+1. DRAGEN all variants is more sensitive than any single caller, however, the call set contains more false positives than the other callers.
 2. Including only variants that pass DRAGEN's filtering criteria we have removes numerous FPs but at the detriment to TPs.
 
 ## Recommendations
 
-1. The previous recommandation still stand i.e. above 50% putiry 3 callers is sufficient to break ties and the use of vardict would be preferred. At lower purity, below 50%, the addition of varscan2 has indeed shown to improve the low purity calls.
-2. The use of SomaticSeq and machine leaning is not a necessary step.
-3. DRAGEN somatic is not to be included yet but the generation of the bam could be.
+1. Part 2a: The previous recommandation still stand i.e. above 50% putiry 3 callers is sufficient to break ties and the use of vardict would be preferred. At lower purity, below 50%, the addition of varscan2 has indeed shown to improve the low purity calls.
+2. Part 2b: The use of SomaticSeq and machine leaning is not a necessary step.
+3. Part 3: DRAGEN somatic is not to be included yet but the generation of the bam could be.
 
 ## What's next
 
