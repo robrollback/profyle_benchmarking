@@ -313,7 +313,7 @@ Any new caller to test? Or move onto RNA and structural variants.
 
 ### February 28, 2018
 
-## Assessment of combination of callers of chromosome 9 of Ceph mixutre
+## Part 1: Assessment of combination of callers of chromosome 9 of Ceph mixture
 
 In this section we investigate the behaviour of combining callers and majority-rule filtering at various purity levels of insilico ceph mixture.  Based on the assessement of individual callers from both the synthetic and insilico mixture: mutect2_3.8, strelka_2.9.6, vardict_1.4.8 and varscan2_2.4.3 were chosen. The expectations is that the addition of more callers should add value in terms of benchmarking metrics.
 
@@ -343,19 +343,86 @@ In this section we investigate the behaviour of combining callers and majority-r
 
 ## Observation : 2 or more callers
 
-1. Looking at calls identified in 2 or more callers, the addition of callers has minimal impact when purity is above 60%. In fact 3 callers has slightly better F1 scores >=50% putiry. However, at lower purity, especially between 10-49% the addition of callers seems to improve F1 score based on the dramatic jump between 2 and 3 callers, and a minor increase between 3 and 4 callers. Looking at the specificiry and sensivity, the decrease precision due to filtering out Tp singletons decreases faster than the increase in sensitivity as callers are added.
+1. Looking at calls identified in 2 or more callers, the addition of callers has minimal impact when purity is above 60%. In fact 3 callers has slightly better F1 scores >=50% purity. However, at lower purity, especially between 10-49%, the addition of callers seems to improve F1 score based on the dramatic jump between 2 and 3 callers, and a minor increase between 3 and 4 callers. Looking at the specificiry and sensivity, the decrease precision due to filtering out TP singletons decreases faster than the increase in sensitivity as callers are added.
 
 ## Recommendations
 
 1. The use of ensemble approach and the number of callers involved in the analysis is dependent on the estimated purity.
 2. Purity above 50%, I would recommend using at least 3 callers and filter >=2 callers.
-3. Purity below 50%, I would recomment using at least 4 callers and filter >=2 callers.
+3. Purity below 50%, I would recommend using at least 4 callers and filter >=2 callers.
 
 ## What's next
 
 1. Missed testing 3 callers implementation using mutect2, strelka2 and varscan2
 2. Trying the machine learning approach: somaticSeq 
 3. Any other suggestions?
+
+### April 25, 2018
+
+## Part 2a: Assessment of combination of callers of chromosome 9 of Ceph mixture
+
+Again in this section we investigate the behaviour of combining callers and majority-rule filtering at various purity levels of insilico ceph mixture.  In part 1 we looked at the combinations of two, three and four callers where one combination was missed - 3 callers: mutect2, strelka2 and varscan.  Also we wanted to compare these combination of callers to somaticSeq - the machine learning approach which won the DREAM challenge.
+
+## Processing SOP
+
+1. VCFs from previous experiment for four callers:  mutect2, strelka, vardict and varscan were selected for combinatorial analysis
+2. VCFs were combined using a bcftools merge wrapper
+3. Ensemble vcf was assessed against the ceph_mixture chr 9 truth set using vcfeval 3.6.2
+
+**F1-score for three caller ensemble approaches**
+
+[F1_score_ensemble_3caller](img/F1_score_ensemble_3caller.jpeg)
+
+## Observations : 3 callers
+
+1. The addition of vardict or varscan2 to mutect2 and strelka2 calls has opposing behaviours when looking at different purities.
+2. Vardict improves calls at the higher purity range and drops below the 95% mark at 20% purity
+3. Varscan2 improves calls at the lower purity range and drops below the 95% mark at 80% purity
+
+## Part 2b: Assessment of SomaticSeq against ensemble approach for chromosome 9 of Ceph mixture
+
+## Processing SOP
+
+1. VCFs from previous experiment for four callers:  mutect2, strelka, vardict and varscan were selected for combinatorial analysis and SomaticSeq
+2. Ensemble and SomaticSeq consensus/boosts vcfs were assessed against the ceph_mixture chr 9 truth set using vcfeval 3.6.2
+
+**F1-score for SomaticSeq comparison**
+
+[F1_score_somaticseq](img/F1_score_somaticseq.jpeg)
+
+## Observations : SomaticSeq
+
+1. SomaticSeq F1 scores are slightly better than the ensemble approach at purities below 30%.
+2. Conversely the ensemble approach has more consistent F1 scores at the higher purity levels (>30% purity the curve is relative flat)
+3. Within somaticSeq, the boost implementation and the consensus 2+ callers have the highest F1 scores at lower putiry levels, however the machine learning approach quickly decreases at purity above 60%.  
+
+# Part 3: Assessment of DRAGENS somatic option for all chromosomes of the ceph_mixture
+
+|   Somatic caller    | Version          | Precision   | Sensitivity | F1-measure | 
+|:------------------- |:-----------------|:----------- |:----------- |:---------- |
+|       varscan       |  2.4.3           | 0.9296      | 0.9604      | 0.9448     |
+|       vardict       |  1.4.8           | 0.9019      | 0.9036      | 0.9027     |
+|       mutect2       |  3.8             | 0.9401      | 0.9758      | 0.9576     |
+|       strelka2      |  2.9.6           | 0.9976      | 0.9232      | 0.9589     |
+|       ensemble      | 1+ callers       | 0.8387      | 0.9937      | 0.9096     |
+|       ensemble      | 2+ callers       | 0.9842      | 0.9811      | 0.9826     |
+|       dragen        | 07.011.295.3.2.8 | 0.6389      | 0.9816      | 0.7740     |
+|     dragen_pass     | 07.011.295.3.2.8 | 0.9524      | 0.6682      | 0.7854     |
+
+## Observations : DRAGEN
+
+1. DRAGEN all variants is more sensitive than all single callers, however, the call set contains more false positives than the other callers.
+2. Including only variants that pass DRAGEN's filtering criteria we have removes numerous FPs but at the detriment to TPs.
+
+## Recommendations
+
+1. The previous recommandation still stand i.e. above 50% putiry 3 callers is sufficient to break ties and the use of vardict would be preferred. At lower purity, below 50%, the addition of varscan2 has indeed shown to improve the low purity calls.
+2. The use of SomaticSeq and machine leaning is not a necessary step.
+3. DRAGEN somatic is not to be included yet but the generation of the bam could be.
+
+## What's next
+
+1. Test DRAGEN generated BAMs with the ensemble approach to see if we can benefit from the processing sped up without lose of accuracy.
 
 ### Contact info
 For any questions or concerns regarding information contained within please contact: 
