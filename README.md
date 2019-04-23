@@ -371,7 +371,7 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 **F1-score for three caller ensemble approaches**
 
-[F1_score_ensemble_3caller](img/F1_score_ensemble_3caller.jpeg)
+![F1_score_ensemble_3caller](img/F1_score_ensemble_3caller.jpeg)
 
 ## Observations : 3 callers
 
@@ -388,7 +388,7 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 **F1-score for SomaticSeq comparison**
 
-[F1_score_somaticseq](img/F1_score_somaticseq.jpeg)
+![F1_score_somaticseq](img/F1_score_somaticseq.jpeg)
 
 ## Observations : SomaticSeq
 
