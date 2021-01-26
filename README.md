@@ -424,6 +424,9 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 1. Test DRAGEN generated BAMs with the ensemble approach to see if we can benefit from the processing sped up without lose of accuracy.
 
+
+
+
 ### January 28, 2021
 
 ## Part 1: Assessment of Mutect2 GATK3 vs GATK4 settings and filtering criteria using Ceph mixture chr9 titration and HCC1395 truth sets 
@@ -444,7 +447,7 @@ Again in this section we investigate the behaviour of combining callers and majo
     - GATK4 more precise than GATK3 (NOTE: af - dark blue is behind gatk4 - purple)
     - GATK4 calls more indels
     
-2. The bottom panel (filtered calls for snps/indels - GATK3 inclusion of "PASS", use of FilterMutectCalls)
+2. The bottom panel (filtered calls for snps/indels - GATK3 inclusion of "PASS", use of FilterMutectCalls + "PASS" filter)
     - Dataset not appropriate for testing af and af_pon criteria due to membership of HG001/HG002 in gnomad and 1000G pon
     - GATK3 vs GATK4 - filtering reduces sensitivity quite signficantly
     - Filtering less impactful for GATK4 than with GATK3
@@ -501,18 +504,16 @@ Again in this section we investigate the behaviour of combining callers and majo
 1. Among union - the merging of the least number of callers is the most precise, the max number of callers the most sensitive
 2. Among 2 callers - Mutect2 + Strelka2 + Varscan2 is the most performant due to best performance amond indels
 
-![HCC1395_ensemble](img/HCC1395_ensemble.png)
+![HCC1395_ensemble](img/HCC1395_ensemble_gatk4.png)
 
 ## Observations 2.4 : HCC1395 (Selection of High and Medium Confidence variants)
 
 1. Among union - again least number of callers is the most precise and max number of callers is the most sensitive
 2. Among 2 callers - Mutect2 + Strelka2 + Vardict is the most performant
-3. Note - Mutect2 + Strelka2 + Vardict union recall is less than recall of 2 caller - still investigating reseason
 
 ## Recommendations
 
 1. Would be advantagous to have a second cancer benchmark dataset to determine if varscan2 or vardict should be the third caller.
-
 
 ## What's next
 
