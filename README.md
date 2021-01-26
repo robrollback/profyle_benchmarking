@@ -436,7 +436,7 @@ Again in this section we investigate the behaviour of combining callers and majo
 4. Apply benchmarking software hap.py with vcfeval algorithm
 5. Using R to generate precision-recall curves
 
-![ceph_mixture_gatk3vsgatk4](ceph_mixture_gatk3vsgatk4.png)
+![ceph_mixture_gatk3vsgatk4](img/ceph_mixture_gatk3vsgatk4.png)
 
 ## Observations 1.1: Ceph mixture (HG001 60x /HG002 30x) chr9 titration
 
@@ -449,7 +449,7 @@ Again in this section we investigate the behaviour of combining callers and majo
     - GATK3 vs GATK4 - filtering reduces sensitivity quite signficantly
     - Filtering less impactful for GATK4 than with GATK3
 
-![HCC1395_gatk4](HCC1395_gatk4.png)
+![HCC1395_gatk4](img/HCC1395_gatk4.png)
 
 ## Observations 1.2 : HCC1395 (Selection of High and Medium Confidence variants: sequenza - cellurity: 0.99 ploidy: 3.2)
 
@@ -480,28 +480,28 @@ Again in this section we investigate the behaviour of combining callers and majo
 1. Final bam using GATK4 best practices on b38
 2. Somatic callers : strelka 2.9.6, mutect2 4.1.8.1, samtools (bcftools 1.9), vardict 1.8.2, and varscan2 2.4.3 
 
-![profyle_gatk4](profyle_gatk4.png)
+![profyle_gatk4](img/profyle_gatk4.png)
 
 ## Observations 2.1 : Ceph mixture (HG001/HG002) chr9 titration - individual caller
 
 1. Recapitulates previously observations - strelka2 most precise and mutect2 most sensitive
 2. Strelka2 and Mutect2 most stable over varying tumor purity 
 
-![HCC1395_profyle_callers](HCC1395_profyle_callers.png)
+![HCC1395_profyle_callers](img/HCC1395_profyle_callers.png)
 
 ## Observations 2.2 : HCC1395 (Selection of High and Medium Confidence variants) - individual callers
 
 1. Similar finds to the ceph mixtures - strelka2 (most precise) and mutect2 (most sensitive) are the top performers again
 2. Differences - vardict performs better than varscan2 - unlike in the ceph mixture results
 
-![ceph_mixture_ensemble](ceph_mixture_ensemble.png)
+![ceph_mixture_ensemble](img/ceph_mixture_ensemble.png)
 
 ## Observations 2.3 : Ceph mixture (HG001/HG002) chr9 titration - ensemble
 
 1. Among union - the merging of the least number of callers is the most precise, the max number of callers the most sensitive
 2. Among 2 callers - Mutect2 + Strelka2 + Varscan2 is the most performant due to best performance amond indels
 
-![HCC1395_ensemble](HCC1395_ensemble.png)
+![HCC1395_ensemble](img/HCC1395_ensemble.png)
 
 ## Observations 2.4 : HCC1395 (Selection of High and Medium Confidence variants)
 
