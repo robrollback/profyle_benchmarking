@@ -439,9 +439,9 @@ Again in this section we investigate the behaviour of combining callers and majo
 4. Apply benchmarking software hap.py with vcfeval algorithm
 5. Using R to generate precision-recall curves
 
-![ceph_mixture_gatk3vsgatk4](img/ceph_mixture_gatk3vsgatk4.png)
-
 ## Observations 1.1: Ceph mixture (HG001 60x /HG002 30x) chr9 titration
+
+![ceph_mixture_gatk3vsgatk4](img/ceph_mixture_gatk3vsgatk4.png)
 
 1. The top panel (raw calls for snps/indels) 
     - GATK4 more precise than GATK3 (NOTE: af - dark blue is behind gatk4 - purple)
@@ -450,26 +450,27 @@ Again in this section we investigate the behaviour of combining callers and majo
 2. The bottom panel (filtered calls for snps/indels - GATK3 inclusion of "PASS", use of FilterMutectCalls + "PASS" filter)
     - Dataset not appropriate for testing af and af_pon criteria due to membership of HG001/HG002 in gnomad and 1000G pon
     - GATK3 vs GATK4 - filtering reduces sensitivity quite signficantly
-    - Filtering less impactful for GATK4 than with GATK3
+    - Filtering less impactful for native GATK4 than with GATK3
 
-![HCC1395_gatk4](img/HCC1395_gatk4.png)
 
 ## Observations 1.2 : HCC1395 (Selection of High and Medium Confidence variants: sequenza - cellurity: 0.99 ploidy: 3.2)
+
+![HCC1395_gatk4](img/HCC1395_gatk4.png)
 
 1. The top panel (raw calls for snps/indels)
     - SNPs: GATK3 slightly more precise and sensitive than GATK4. 
     - INDELs: GATK4 more sensitive than GATK3
     - Within GATK4 - af+pon slightly less sensitive than native GATK4 or GATK4 + af
     
-2. The bottom panel (filtered calls for snps/indels - GATK3 inclusion of "PASS", use of FilterMutectCalls)
-    - SNPs: GATK3 slightly more sensitive than GATK4. GATK4 variants very similar by GATK4 + af is very slightly better
-    - INDELs: GATK4 is more sensitive than GATK3.  Among GATK4 variants which are quite similary GATK4 + af is most performant
+2. The bottom panel (filtered calls for snps/indels - GATK3 inclusion of "PASS", use of FilterMutectCalls + "PASS" filter)
+    - SNPs: GATK3 slightly more sensitive than GATK4. GATK4 iterations very similar, but GATK4 + af is slightly better
+    - INDELs: GATK4 is more sensitive than GATK3.  Among GATK4 iterations again GATK4 + af is the most performant
     - Filtering greating improves precision with moderate reductions to sensitivity
     
 ## Recommendations
 
 1. Moving to mutect GATK4 + af (--af-of-alleles-not-in-resource 0.0000025)
-2. Use FilterMutectCalls 
+2. Use FilterMutectCalls with GATK4
 
 ## What's next
 
@@ -480,36 +481,41 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 ## Processing SOP
 
-1. Final bam using GATK4 best practices on b38
+1. Final recalibrated bam using GATK4 best practices on b38
 2. Somatic callers : strelka 2.9.6, mutect2 4.1.8.1, samtools (bcftools 1.9), vardict 1.8.2, and varscan2 2.4.3 
 
-![profyle_gatk4](img/profyle_gatk4.png)
 
 ## Observations 2.1 : Ceph mixture (HG001/HG002) chr9 titration - individual caller
 
-1. Recapitulates previously observations - strelka2 most precise and mutect2 most sensitive
+![profyle_gatk4](img/profyle_gatk4.png)
+
+1. Recapitulates previously observations (see April 25, 2018) - strelka2 most precise and mutect2 most sensitive
 2. Strelka2 and Mutect2 most stable over varying tumor purity 
 
-![HCC1395_profyle_callers](img/HCC1395_profyle_callers.png)
 
 ## Observations 2.2 : HCC1395 (Selection of High and Medium Confidence variants) - individual callers
+
+![HCC1395_profyle_callers](img/HCC1395_profyle_callers.png)
 
 1. Similar finds to the ceph mixtures - strelka2 (most precise) and mutect2 (most sensitive) are the top performers again
 2. Differences - vardict performs better than varscan2 - unlike in the ceph mixture results
 
+
+## Observations 2.3 : Ensemble - Ceph mixture (HG001/HG002) chr9 titration
+
 ![ceph_mixture_ensemble](img/ceph_mixture_ensemble.png)
 
-## Observations 2.3 : Ceph mixture (HG001/HG002) chr9 titration - ensemble
-
 1. Among union - the merging of the least number of callers is the most precise, the max number of callers the most sensitive
-2. Among 2 callers - Mutect2 + Strelka2 + Varscan2 is the most performant due to best performance amond indels
+2. Among 2 callers - Mutect2 + Strelka2 + Varscan2 is the most performant due to best performance among indels
+
+
+## Observations 2.4 : Ensemble - HCC1395 (Selection of High and Medium Confidence variants)
 
 ![HCC1395_ensemble](img/HCC1395_ensemble_gatk4.png)
 
-## Observations 2.4 : HCC1395 (Selection of High and Medium Confidence variants)
-
 1. Among union - again least number of callers is the most precise and max number of callers is the most sensitive
 2. Among 2 callers - Mutect2 + Strelka2 + Vardict is the most performant
+3. Note: in m2s2v2 - union set is less sensitive than intersect of 2 callers - still investigating 
 
 ## Recommendations
 
@@ -517,7 +523,7 @@ Again in this section we investigate the behaviour of combining callers and majo
 
 ## What's next
 
-1. Investigation recall increase in m2s2v 2 caller vs union
+1. Investigation recall increase in m2s2v2 2 caller vs union
 2. Test FFPE filtering using HCC1395 samples
 3. New structural variant benchmark published in October - possible to see consensus between this call set and BC's
 
