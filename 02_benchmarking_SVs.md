@@ -26,6 +26,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 5. Base recalibration of each samples with GATK 4.18.2
 
 **Benchmarking SOP**
+
 To be announced later
 
 Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be designed and tested.
@@ -36,6 +37,7 @@ Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be
 ![truthset](img/sv/colo829_truthset.jpeg)
 
 55 DEL, INS, DUP, INV
+
 13 inter-chromosomal translocation
 
 Two complex breakage-fusion-bridge events are present in COLO829
