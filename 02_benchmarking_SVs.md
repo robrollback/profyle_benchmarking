@@ -15,9 +15,9 @@ COLO829 and COLO829BL libraries were prepped with Truseq Nano reagent kit and se
 
 This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/deed.en_US). This means that you are able to copy, share and modify the work, as long as the result is distributed under the same license.
 
-## Setup
+# Setup
 
-#Bam Procsessing SOP
+**Bam Procsessing SOP**
 
 1. Adapter and quality filtering of raw reads with skewer 0.2.2
 2. Alignment of trimmed reads to hs57d5 with bwa+mem 0.7.17
@@ -25,13 +25,13 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 4. Mark duplicates with sambamba 0.7.0
 5. Base recalibration of each samples with GATK 4.18.2
 
-# Benchmarking SOP
+**Benchmarking SOP**
 To be announced later
 
 Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be designed and tested.
 
 
-# Truth set distribution
+**Truth set distribution**
 
 ![truthset](img/sv/colo829_truthset.jpeg)
 
@@ -40,7 +40,7 @@ Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be
 
 Two complex breakage-fusion-bridge events are present in COLO829
 
-# Structural Variant SOP
+**Structural Variant SOP**
 
 |   Somatic caller    | Version       | 
 |:------------------- |:------------- |
@@ -55,10 +55,9 @@ Two complex breakage-fusion-bridge events are present in COLO829
 
 
 
-## Results
+# Results
 
-
-# QC report
+**QC report**
 
 Tumor purity : 0.990 and ploidy: 3.1
 
