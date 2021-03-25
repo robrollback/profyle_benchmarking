@@ -13,6 +13,16 @@ COLO829 and COLO829BL libraries were prepped with Truseq Nano reagent kit and se
 
 ![Data processing diagram](img/sv/SOP.jpeg)
 
+**Truth set distribution**
+
+![truthset](img/sv/colo829_truthset.jpeg)
+
+55 DEL, INS, DUP, INV
+
+13 inter-chromosomal translocation
+
+Two complex breakage-fusion-bridge events are present in COLO829
+
 This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unported License](http://creativecommons.org/licenses/by-sa/3.0/deed.en_US). This means that you are able to copy, share and modify the work, as long as the result is distributed under the same license.
 
 # Setup
@@ -25,22 +35,6 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 4. Mark duplicates with sambamba 0.7.0
 5. Base recalibration of each samples with GATK 4.18.2
 
-**Benchmarking SOP**
-
-To be announced later
-
-Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be designed and tested.
-
-
-**Truth set distribution**
-
-![truthset](img/sv/colo829_truthset.jpeg)
-
-55 DEL, INS, DUP, INV
-
-13 inter-chromosomal translocation
-
-Two complex breakage-fusion-bridge events are present in COLO829
 
 **Structural Variant SOP**
 
@@ -55,7 +49,11 @@ Two complex breakage-fusion-bridge events are present in COLO829
 |       svaba         |  0.2.2        | 
 |       ensemble      | metasv-custom |
 
+**Benchmarking SOP**
 
+To be announced later
+
+Unlike GIAB benchmark, the truth set is in breakpoint notation.  New SOP must be designed and tested.
 
 # Results
 
