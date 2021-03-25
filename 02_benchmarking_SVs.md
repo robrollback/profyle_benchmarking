@@ -43,7 +43,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 |     **cnvkit**      |  0.9.5        |
 |     **delly**       |  0.8.1        | 
 |     **lumpy**       |  0.2.13       | 
-|  **manta+strelka2** | 1.5.0+2.9.10  | 
+|     **manta**       |  1.5.0        | 
 |     **wham**        |  1.8.0        | 
 |       gridss        |  2.10.1       | 
 |       svaba         |  0.2.2        | 
