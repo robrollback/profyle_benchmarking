@@ -20,7 +20,7 @@ This work is licensed under a [Creative Commons Attribution-ShareAlike 3.0 Unpor
 **Bam Procsessing SOP**
 
 1. Adapter and quality filtering of raw reads with skewer 0.2.2
-2. Alignment of trimmed reads to hs57d5 with bwa+mem 0.7.17
+2. Alignment of trimmed reads to hs37d5 with bwa+mem 0.7.17
 3. GATK 3.8 Indel realignment using both samples to refine indel regions
 4. Mark duplicates with sambamba 0.7.0
 5. Base recalibration of each samples with GATK 4.18.2
@@ -47,12 +47,12 @@ Two complex breakage-fusion-bridge events are present in COLO829
 |   Somatic caller    | Version       | 
 |:------------------- |:------------- |
 |     **cnvkit**      |  0.9.5        |
-|     **delly**       |  2.4.3        | 
+|     **delly**       |  0.8.1        | 
 |     **lumpy**       |  0.2.13       | 
 |  **manta+strelka2** | 1.5.0+2.9.10  | 
 |     **wham**        |  1.8.0        | 
 |       gridss        |  2.10.1       | 
-|       svaba         |  2.9.6        | 
+|       svaba         |  0.2.2        | 
 |       ensemble      | metasv-custom |
 
 
