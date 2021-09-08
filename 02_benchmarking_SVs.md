@@ -25,7 +25,11 @@ realignment with GATK (v3.4-46, (DePristo et al., 2011) )
 
 ![truthset](img/sv/colo829_truthset.jpeg)
 
-38 DEL 3 INS 7 DUP 7 INV 13 inter-chromosomal translocation
+38 DEL 
+3 INS 
+7 DUP 
+7 INV 
+13 inter-chromosomal translocation
 
 Two complex breakage-fusion-bridge events are present in COLO829
 
@@ -87,16 +91,17 @@ Tumor purity : 0.990 and ploidy: 3.1
 
 **Single caller benchmark**
 
-![single\_caller\_concordance](img/sv/single_caller_concordance.png)
+![single_caller_concordance](img/sv/single_caller_concordance.png)
 
-Observations: 1. Not all callers can call the same SVTYPES - Lumpy and
-WHAM are unable to identify insertions. WHAM does not call
-translocations. 1. With the exception of INS (Lumpy and WHAM) and TRA
-(WHAM), all callers are able to call 68% or more of TPs in the truth
-set. 2. Of all the callers tested, GRIDSS and Manta were the most
-performant over all SVTYPES 3. For DEL, DUP, INV and TRA most of the
-difference between caller seen are in how well the program controls FP -
-precision differences.
+Observations: 
+1.  Not all callers can call the same SVTYPES - Lumpy and WHAM are unable 
+    to identify insertions. WHAM does not call translocations. 
+2. With the exception of INS (Lumpy and WHAM) and TRA (WHAM), all callers 
+    are able to call 68% or more of TPs in the truth set. 2. Of all the 
+    callers tested, GRIDSS and Manta were the most performant over all 
+    SVTYPES 
+3. For DEL, DUP, INV and TRA most of the difference between caller seen are 
+    in how well the program controls FP - precision differences.
 
 **Investigating overlapping true positives**
 
@@ -109,51 +114,60 @@ callers. So to investigate, we wanted to investigate the overlap of true
 positives across all callers tested to understand more clearly the added
 value each caller provides.
 
-Method: 1. Use upsetR to look at the overlaps between the truth set and
-all callers tested for a given SV type 2. Identify missing calls to gain
-insight as to why these were missed.
+Method: 
+1.  Use upsetR to look at the overlaps between the truth set and all callers 
+    tested for a given SV type 
+2. Identify missing calls to gain insight as to why these were missed.
 
 *Deletions*
 
-![del\_upset](img/sv/del_upset.png)
+![del_upset](img/sv/del_upset.png)
 
-Observations: 1. 25/38 (66%) of Deletions were captured by all SV
-callers 2. GRIDSS and Manta were the most performant and captured the
-most SVs uniquely, with the exception of WHAM which captured one DEL
-uniquely 3. 2 Deletions missed (truthset\_37\_1 - 46bp and
-truthset\_62\_1 - 44bp) both short deletions. This is expected since
-short reads typically have a hard time with short SVs and most callers
-have a 50bp cutoff threshold. Long reads may help in recovering these.
+Observations: 
+1.  25/38 (66%) of Deletions were captured by all SV callers 
+2.  GRIDSS and Manta were the most performant and captured the most SVs 
+    uniquely, with the exception of WHAM which captured one DEL uniquely 
+3.  2 Deletions missed (truthset\_37\_1 - 46bp and truthset\_62\_1 - 44bp) 
+    both short deletions. This is expected since short reads typically have 
+    a hard time with short SVs and most callers have a 50bp cutoff threshold. 
+    Long reads may help in recovering these.
 
 *Insertions*
 
-![ins\_upset](img/sv/ins_upset.png)
+![ins_upset](img/sv/ins_upset.png)
 
-Observations: 1. Only GRIDSS and Manta identified one of the three
-Insertions. Lumpy and WHAM do not call insertions and Delly was unable
-to identify any of the true insertions 2. Again shorter SVs were missed
-(truthset\_49\_1 - 98 bp and truthset\_51\_1 - 1 bp (??))
+Observations: 
+1.  Only GRIDSS and Manta identified one of the three insertions. Lumpy 
+    and WHAM do not call insertions and Delly was unable to identify 
+    any of the true insertions 
+2.  Again shorter SVs were missed (truthset\_49\_1 - 98 bp and 
+    truthset\_51\_1 - 1 bp (??))
 
 *Duplications*
 
-![dup\_upset](img/sv/dup_upset.png)
+![dup_upset](img/sv/dup_upset.png)
 
-Observations: 1. GRIDSS and WHAM capture all 7 Duplications 2. No
-Duplications were missed.
+Observations: 
+1.  GRIDSS and WHAM capture all 7 Duplications 
+2.  No Duplications were missed.
 
 *Inversion*
 
-![inv\_upset](img/sv/inv_upset.png)
+![inv_upset](img/sv/inv_upset.png)
 
-Observations: 1. All but WHAM identified all 7 inversions 2. No SVs were
-missed
+Observations: 
+1.  All but WHAM identified all 7 inversions 
+2.  No SVs were missed
 
 *Translocation*
 
-![tra\_upset](img/sv/tra_upset.png)
+![tra_upset](img/sv/tra_upset.png)
 
-Observations: 1. 11/13 (85%) of translocations were identified by all
-callers (excluding WHAM) 2. GRIDSS identified all 13 calls
+Observations: 
+
+1.  11/13 (85%) of translocations were identified by all
+    callers (excluding WHAM) 
+2.  GRIDSS identified all 13 calls
 
 *Final Observations*
 
@@ -179,7 +193,7 @@ callers (excluding WHAM) 2. GRIDSS identified all 13 calls
     excluding GRIDSS to mimic metaSV approach.
 4.  Same testing methodology as described above was preformed.
 
-![ensemble\_concordance](img/sv/ensemble_concordance.png)
+![ensemble_concordance](img/sv/ensemble_concordance.png)
 
 Observations:
 
