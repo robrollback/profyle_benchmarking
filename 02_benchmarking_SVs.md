@@ -127,8 +127,8 @@ Observations:
 1.  25/38 (66%) of Deletions were captured by all SV callers
 2.  GRIDSS and Manta were the most performant and captured the most SVs
     uniquely, with the exception of WHAM which captured one DEL uniquely
-3.  2 Deletions missed (truthset\_37\_1 - 46bp and truthset\_62\_1 -
-    44bp) both short deletions. This is expected since short reads
+3.  2 Deletions missed (truthset\_37\_1 - 45bp and truthset\_62\_1 -
+    49bp) both short deletions. This is expected since short reads
     typically have a hard time with short SVs and most callers have a
     50bp cutoff threshold. Long reads may help in recovering these.
 
@@ -141,8 +141,8 @@ Observations:
 1.  Only GRIDSS and Manta identified one of the three Insertions. Lumpy
     and WHAM do not call insertions and Delly was unable to identify any
     of the true insertions
-2.  Again shorter SVs were missed (truthset\_49\_1 - 98 bp and
-    truthset\_51\_1 - 1 bp (??))
+2.  Again shorter SVs were missed (truthset\_49\_1 - 96 bp and
+    truthset\_51\_1 - 100 bp) 
 
 *Duplications*
 
@@ -196,7 +196,7 @@ Methods:
     each other given a 200 bp flank around the callers breakpoint.
 3.  Additionally, SURVIVOR merge was used on all SV caller tested,
     excluding GRIDSS to mimic metaSV approach.
-4.  Same testing methodology as described above was preformed.
+4.  Same benchmarking methodology as described above was preformed.
 
 ![ensemble\_concordance](img/sv/ensemble_concordance.png)
 
@@ -214,7 +214,7 @@ Observations:
     translocations and 86% (6) inversion. Union of calls pulls in
     numerous FPs, so filter for 2+ callers greatly improved precision
     with minor reductions in TPs (4 Del, 1 (and only) Ins, and 1 TRA)
-3.  The addition of GRIDDS in the full ensemble of all callers (MGLDW)
+3.  The addition of GRIDSS in the full ensemble of all callers (MGLDW)
     was of no added value. The number of TPs remained the same and the
     FPs increased.
 4.  Using the two most performant callers GRIDSS and manta was indeed
