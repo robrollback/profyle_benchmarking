@@ -50,7 +50,6 @@ the result is distributed under the same license.
 
 | Somatic caller | Version       |
 |:---------------|:--------------|
-| **cnvkit**     | 0.9.5         |
 | **delly**      | 0.8.1         |
 | **lumpy**      | 0.3.1         |
 | **manta**      | 1.5.0         |
@@ -66,6 +65,8 @@ Tumor purity : 0.990 and ploidy: 3.1
 |:------------|:-----|:------|:------|:-----------|:---------|:----------|:------------|:-----------------|:--------------|
 | COLO829N    | 41%  | 92.3% | 74.0% | 36.0X      | 34.9X    | 100%      | 518 bp      | 528 bp           | 0%            |
 | COLO829T    | 41%  | 91.7% | 91.1% | 93.0X      | 92.2X    | 100%      | 531 bp      | 542 bp           | 0%            |
+
+**September 10, 2021**
 
 **Benchmarking SOP**
 
@@ -184,6 +185,8 @@ Observations:
     with manta should be most performant.
 
 *Multi-caller ensemble versus curated combination*
+
+Methods:
 
 1.  Run ensemble approach (metaSV) on all SV callers tested, excluding
     GRIDSS
